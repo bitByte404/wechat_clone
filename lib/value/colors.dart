@@ -13,4 +13,5 @@ class AppColors {
   static const Color findRightArrowColor = Color(0xFFB2B2B2);
   static const Color iconColor = Color(0xFF989BA0);
   static const Color borderColor = Color(0xFFCBCBCB);
+  static const Color selfBubleColor = Color(0xFF93EA67);
 }

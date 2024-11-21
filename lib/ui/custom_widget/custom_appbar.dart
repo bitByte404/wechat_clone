@@ -14,6 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      scrolledUnderElevation: 0,
       elevation: 0,
       backgroundColor: AppColors.appBarColor,
       title: Stack(
@@ -33,10 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(
-                  Assets.images.iconSearch.path,
-                  height: AppSizes.iconSize,
-                ),
+                const Icon(Icons.search, color: Color(0xFF050507), size: AppSizes.iconSize + 2,),
                 const SizedBox(
                   width: 20,
                 ),
