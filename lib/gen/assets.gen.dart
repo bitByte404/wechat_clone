@@ -12,10 +12,6 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/Fav_List_Add_Icon@3x.png
-  AssetGenImage get favListAddIcon3x =>
-      const AssetGenImage('assets/images/Fav_List_Add_Icon@3x.png');
-
   /// File path: assets/images/avatar.jpg
   AssetGenImage get avatar => const AssetGenImage('assets/images/avatar.jpg');
 
@@ -37,12 +33,84 @@ class $AssetsImagesGen {
   /// File path: assets/images/avatar6.jpg
   AssetGenImage get avatar6 => const AssetGenImage('assets/images/avatar6.jpg');
 
-  /// File path: assets/images/ff_search_magnifier@3x.png
-  AssetGenImage get ffSearchMagnifier3x =>
-      const AssetGenImage('assets/images/ff_search_magnifier@3x.png');
-
   /// File path: assets/images/haugnbo.png
   AssetGenImage get haugnbo => const AssetGenImage('assets/images/haugnbo.png');
+
+  /// File path: assets/images/icon_acount_enotification.png
+  AssetGenImage get iconAcountEnotification =>
+      const AssetGenImage('assets/images/icon_acount_enotification.png');
+
+  /// File path: assets/images/icon_add.png
+  AssetGenImage get iconAdd =>
+      const AssetGenImage('assets/images/icon_add.png');
+
+  /// File path: assets/images/icon_arrow.png
+  AssetGenImage get iconArrow =>
+      const AssetGenImage('assets/images/icon_arrow.png');
+
+  /// File path: assets/images/icon_contact_econtact.png
+  AssetGenImage get iconContactEcontact =>
+      const AssetGenImage('assets/images/icon_contact_econtact.png');
+
+  /// File path: assets/images/icon_find_game.png
+  AssetGenImage get iconFindGame =>
+      const AssetGenImage('assets/images/icon_find_game.png');
+
+  /// File path: assets/images/icon_find_kyk.png
+  AssetGenImage get iconFindKyk =>
+      const AssetGenImage('assets/images/icon_find_kyk.png');
+
+  /// File path: assets/images/icon_find_newfriend.png
+  AssetGenImage get iconFindNewfriend =>
+      const AssetGenImage('assets/images/icon_find_newfriend.png');
+
+  /// File path: assets/images/icon_find_pyq.png
+  AssetGenImage get iconFindPyq =>
+      const AssetGenImage('assets/images/icon_find_pyq.png');
+
+  /// File path: assets/images/icon_find_saoyisao.png
+  AssetGenImage get iconFindSaoyisao =>
+      const AssetGenImage('assets/images/icon_find_saoyisao.png');
+
+  /// File path: assets/images/icon_find_sys.png
+  AssetGenImage get iconFindSys =>
+      const AssetGenImage('assets/images/icon_find_sys.png');
+
+  /// File path: assets/images/icon_find_weapp.png
+  AssetGenImage get iconFindWeapp =>
+      const AssetGenImage('assets/images/icon_find_weapp.png');
+
+  /// File path: assets/images/icon_groupchat.png
+  AssetGenImage get iconGroupchat =>
+      const AssetGenImage('assets/images/icon_groupchat.png');
+
+  /// File path: assets/images/icon_mine_collect.png
+  AssetGenImage get iconMineCollect =>
+      const AssetGenImage('assets/images/icon_mine_collect.png');
+
+  /// File path: assets/images/icon_mine_emoji.png
+  AssetGenImage get iconMineEmoji =>
+      const AssetGenImage('assets/images/icon_mine_emoji.png');
+
+  /// File path: assets/images/icon_mine_pay.png
+  AssetGenImage get iconMinePay =>
+      const AssetGenImage('assets/images/icon_mine_pay.png');
+
+  /// File path: assets/images/icon_mine_qrcode.png
+  AssetGenImage get iconMineQrcode =>
+      const AssetGenImage('assets/images/icon_mine_qrcode.png');
+
+  /// File path: assets/images/icon_mine_setting.png
+  AssetGenImage get iconMineSetting =>
+      const AssetGenImage('assets/images/icon_mine_setting.png');
+
+  /// File path: assets/images/icon_search.png
+  AssetGenImage get iconSearch =>
+      const AssetGenImage('assets/images/icon_search.png');
+
+  /// File path: assets/images/icon_service_account.png
+  AssetGenImage get iconServiceAccount =>
+      const AssetGenImage('assets/images/icon_service_account.png');
 
   /// File path: assets/images/tabbar_contacts@3x.png
   AssetGenImage get tabbarContacts3x =>
@@ -78,7 +146,6 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        favListAddIcon3x,
         avatar,
         avatar1,
         avatar2,
@@ -86,8 +153,26 @@ class $AssetsImagesGen {
         avatar4,
         avatar5,
         avatar6,
-        ffSearchMagnifier3x,
         haugnbo,
+        iconAcountEnotification,
+        iconAdd,
+        iconArrow,
+        iconContactEcontact,
+        iconFindGame,
+        iconFindKyk,
+        iconFindNewfriend,
+        iconFindPyq,
+        iconFindSaoyisao,
+        iconFindSys,
+        iconFindWeapp,
+        iconGroupchat,
+        iconMineCollect,
+        iconMineEmoji,
+        iconMinePay,
+        iconMineQrcode,
+        iconMineSetting,
+        iconSearch,
+        iconServiceAccount,
         tabbarContacts3x,
         tabbarContactsHL3x,
         tabbarDiscover3x,

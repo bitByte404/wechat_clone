@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_clone/colors.dart';
+import 'package:flutter/services.dart';
+import 'package:wechat_clone/ui/pages/page_contact.dart';
+import 'package:wechat_clone/ui/pages/page_find.dart';
+import 'package:wechat_clone/ui/pages/page_mine.dart';
+import 'package:wechat_clone/value/colors.dart';
 import 'package:wechat_clone/gen/assets.gen.dart';
-import 'package:wechat_clone/pages/page_wechat.dart';
+import 'package:wechat_clone/ui/pages/page_wechat.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  int pageIndex = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +22,17 @@ class MyApp extends StatelessWidget {
   }
 }
 
+var pageList = [
+  const WechatPage(),
+  const ContactPage(),
+  const FindPage(),
+  const MinePage(),
+];
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
 
-  int _selectedIndex = 0;
+  int _selectedIndex = 3;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -28,12 +40,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   double size = 25;
+  
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppColors.appBarColor,
+      statusBarBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.dark,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: WechatPage(),
+        body: pageList[widget._selectedIndex],
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
             splashFactory: NoSplash.splashFactory
