@@ -35,8 +35,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  flutter_gen:
-#  shared_preferences:
+  flutter_gen: ^5.8.0
+  shared_preferences: ^2.3.3
+  sqflite: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -48,7 +49,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
-  flutter_gen_runner:
+  flutter_gen_runner: ^5.8.0
   build_runner: ^2.4.13
 #  rongcloud_im_wrapper_plugin: ^5.6.12
 

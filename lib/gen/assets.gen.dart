@@ -48,6 +48,10 @@ class $AssetsImagesGen {
   AssetGenImage get iconAdd =>
       const AssetGenImage('assets/images/icon_add.png');
 
+  /// File path: assets/images/icon_app.png
+  AssetGenImage get iconApp =>
+      const AssetGenImage('assets/images/icon_app.png');
+
   /// File path: assets/images/icon_arrow.png
   AssetGenImage get iconArrow =>
       const AssetGenImage('assets/images/icon_arrow.png');
@@ -173,6 +177,7 @@ class $AssetsImagesGen {
         haugnbo,
         iconAcountEnotification,
         iconAdd,
+        iconApp,
         iconArrow,
         iconChatAdd,
         iconChatEmoji,

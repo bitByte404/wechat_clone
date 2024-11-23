@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_clone/test_page.dart';
 import 'package:wechat_clone/ui/pages/page_first.dart';
 import 'package:wechat_clone/ui/pages/page_home.dart';
-import 'package:wechat_clone/ui/pages/page_login.dart';
+import 'package:wechat_clone/ui/pages/page_launch.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,12 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: '微信',
-      // home: MyHomePage(),
-      initialRoute: '/home',
+      initialRoute: '/launch',
       routes: {
         '/home': (context) => MyHomePage(),
-        '/first': (context) => FirstPage(),
+        '/first': (context) => const FirstPage(),
+        '/launch': (context) => const LaunchPage()
       },
     );
   }

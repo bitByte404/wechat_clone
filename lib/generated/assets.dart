@@ -13,6 +13,7 @@ class Assets {
   static const String imagesHaugnbo = 'assets/images/haugnbo.png';
   static const String imagesIconAcountEnotification = 'assets/images/icon_acount_enotification.png';
   static const String imagesIconAdd = 'assets/images/icon_add.png';
+  static const String imagesIconApp = 'assets/images/icon_app.png';
   static const String imagesIconArrow = 'assets/images/icon_arrow.png';
   static const String imagesIconChatAdd = 'assets/images/icon_chat_add.png';
   static const String imagesIconChatEmoji = 'assets/images/icon_chat_emoji.png';

@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:wechat_clone/gen/assets.gen.dart';
 import 'package:wechat_clone/ui/pages/page_login.dart';
 import 'package:wechat_clone/ui/pages/page_register.dart';
+import 'package:wechat_clone/utls/utils_login.dart';
 import 'package:wechat_clone/value/colors.dart';
 
 import '../custom_widget/custom_bottom.dart';
 
-class FirstPage extends StatelessWidget {
+class FirstPage extends StatefulWidget {
   const FirstPage({super.key});
+
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wechat_clone/ui/custom_widget/custom_bottom.dart';
+import 'package:wechat_clone/utls/utils_login.dart';
 import 'package:wechat_clone/value/colors.dart';
 
 import '../custom_widget/custom_textFiled.dart';
@@ -20,11 +21,16 @@ class LoginPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.close,
-                  size: 35,
+                child: GestureDetector(
+                  child: const Icon(
+                    Icons.close,
+                    size: 35,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
               ),
               Center(
@@ -90,6 +96,7 @@ class LoginPage extends StatelessWidget {
                             var phone = phoneEditController.text;
                             var contry = contryEditController.text;
                             if (phone.isNotEmpty && contry.isNotEmpty) {
+                              LoginUtils().updateIsLogined(true);
                               Navigator.of(context)
                                   .pushReplacementNamed('/home');
                             }
