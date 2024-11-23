@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-
 import '../models/models.dart';
 
 class DatabaseHelper {
@@ -34,17 +32,19 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE Messages (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        contact_id INTEGER NOT NULL,
+        from_contact_id INTEGER NOT NULL,
+        group_contact_id INTEGER NOT NULL,
         content TEXT NOT NULL,
         time TEXT NOT NULL,
-        FOREIGN KEY (contact_id) REFERENCES Contacts(id)
+        FOREIGN KEY (from_contact_id) REFERENCES Contacts(id),
+        FOREIGN KEY (group_contact_id) REFERENCES Contacts(id)
       )
     ''');
     await db.execute('''
       CREATE TABLE LastMessages (
-        contact_id INTEGER PRIMARY KEY,
+        group_contact_id INTEGER PRIMARY KEY,
         last_message_id INTEGER NOT NULL,
-        FOREIGN KEY (contact_id) REFERENCES Contacts(id),
+        FOREIGN KEY (group_contact_id) REFERENCES Contacts(id),
         FOREIGN KEY (last_message_id) REFERENCES Messages(id)
       )
     ''');
@@ -59,48 +59,34 @@ class DatabaseHelper {
 
   Future<int> insertMessage(MessageItem message) async {
     final db = await database;
-    int? contactId = await getContactIdByName(message.from);
-    if (contactId == null) {
+    int? fromContactId = await getContactIdByName(message.from);
+    int? groupContactId = await getContactIdByName(message.group);
+    if (fromContactId == null || groupContactId == null) {
       throw Exception('Contact not found');
     }
     Map<String, dynamic> messageMap = {
-      'contact_id': contactId,
+      'from_contact_id': fromContactId,
+      'group_contact_id': groupContactId,
       'content': message.content,
       'time': message.time,
     };
     int messageId = await db.insert('Messages', messageMap,
         conflictAlgorithm: ConflictAlgorithm.replace);
-    await updateLastMessage(contactId, messageId);
+    await updateLastMessage(groupContactId, messageId, message.content);
     return messageId;
   }
 
-  Future<void> updateLastMessage(int contactId, int messageId) async {
+  Future<void> updateLastMessage(int groupContactId, int messageId, String content) async {
     final db = await database;
     await db.insert('LastMessages', {
-      'contact_id': contactId,
+      'group_contact_id': groupContactId,
       'last_message_id': messageId,
     }, conflictAlgorithm: ConflictAlgorithm.replace);
-  }
 
-  Future<List<Contact>> getAllContacts() async {
-    final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('Contacts');
-    return List.generate(maps.length, (i) {
-      return Contact.fromMap(maps[i]);
-    });
-  }
-
-  Future<List<LastMessage>> getLastMessages() async {
-    final db = await database;
-    final List<Map<String, dynamic>> maps = await db.rawQuery('''
-      SELECT c.avatar, c.name, m.content AS lastMessage
-      FROM LastMessages lm
-      JOIN Contacts c ON lm.contact_id = c.id
-      JOIN Messages m ON lm.last_message_id = m.id
-    ''');
-    return List.generate(maps.length, (i) {
-      return LastMessage.fromMap(maps[i]);
-    });
+    // Update the LastMessage table with the latest message content
+    await db.update('LastMessages', {
+      'last_message_id': messageId,
+    }, where: 'group_contact_id = ?', whereArgs: [groupContactId]);
   }
 
   Future<int?> getContactIdByName(String name) async {
@@ -115,5 +101,11 @@ class DatabaseHelper {
       return maps.first['id'] as int;
     }
     return null;
+  }
+
+  Future<void> deleteChatDatabase() async {
+    String path = join(await getDatabasesPath(), "messages.db");
+    await deleteDatabase(path);
+    _db = null; // Reset database instance
   }
 }

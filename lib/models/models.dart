@@ -20,17 +20,19 @@ class Contact {
 }
 
 class MessageItem {
+  String group; // 与哪个联系人的聊天记录
   String from; // 发送人的名字
   String content; // 具体消息内容
   String time; // 发送时的时间戳
 
-  MessageItem(this.from, this.content, this.time);
+  MessageItem(this.from, this.content, this.time, this.group);
 
   Map<String, dynamic> toMap() {
     return {
       'from': from,
       'content': content,
       'time': time,
+      'group': time,
     };
   }
 
@@ -39,6 +41,7 @@ class MessageItem {
       map['from'] as String,
       map['content'] as String,
       map['time'] as String,
+      map['group'] as String,
     );
   }
 }
