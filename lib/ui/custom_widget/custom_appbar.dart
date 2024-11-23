@@ -21,14 +21,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         alignment: Alignment.center,
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Flexible(
-            child: Center(
+            Center(
               child: Text(
                 title,
                 style: const TextStyle(fontSize: AppSizes.appBarTextSize),
               ),
             ),
-          ),
           Align(
             alignment: Alignment.centerRight,
             child: Row(

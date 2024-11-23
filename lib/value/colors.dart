@@ -14,4 +14,8 @@ class AppColors {
   static const Color iconColor = Color(0xFF989BA0);
   static const Color borderColor = Color(0xFFCBCBCB);
   static const Color selfBubleColor = Color(0xFF93EA67);
+  static const Color alertTextLightBlue = Color(0xFF5F799C);
+  static const Color alertTextLightGrey = Color(0xFFAEAEAE);
+  static const Color dividerColor = Color(0xFFE3E3E3);
+  static const Color colorGrey = Color(0xFFF1F1F1);
 }

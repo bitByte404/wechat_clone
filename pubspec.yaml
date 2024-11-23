@@ -36,7 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_gen:
-  intl:
+#  shared_preferences:
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +50,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   flutter_gen_runner:
   build_runner: ^2.4.13
+#  rongcloud_im_wrapper_plugin: ^5.6.12
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -9,10 +9,14 @@ class Assets {
   static const String imagesAvatar4 = 'assets/images/avatar4.jpg';
   static const String imagesAvatar5 = 'assets/images/avatar5.jpg';
   static const String imagesAvatar6 = 'assets/images/avatar6.jpg';
+  static const String imagesBackground = 'assets/images/background.jpg';
   static const String imagesHaugnbo = 'assets/images/haugnbo.png';
   static const String imagesIconAcountEnotification = 'assets/images/icon_acount_enotification.png';
   static const String imagesIconAdd = 'assets/images/icon_add.png';
   static const String imagesIconArrow = 'assets/images/icon_arrow.png';
+  static const String imagesIconChatAdd = 'assets/images/icon_chat_add.png';
+  static const String imagesIconChatEmoji = 'assets/images/icon_chat_emoji.png';
+  static const String imagesIconChatVoice = 'assets/images/icon_chat_voice.png';
   static const String imagesIconContactEcontact = 'assets/images/icon_contact_econtact.png';
   static const String imagesIconFindGame = 'assets/images/icon_find_game.png';
   static const String imagesIconFindKyk = 'assets/images/icon_find_kyk.png';

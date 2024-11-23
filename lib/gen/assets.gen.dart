@@ -33,6 +33,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/avatar6.jpg
   AssetGenImage get avatar6 => const AssetGenImage('assets/images/avatar6.jpg');
 
+  /// File path: assets/images/background.jpg
+  AssetGenImage get background =>
+      const AssetGenImage('assets/images/background.jpg');
+
   /// File path: assets/images/haugnbo.png
   AssetGenImage get haugnbo => const AssetGenImage('assets/images/haugnbo.png');
 
@@ -47,6 +51,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/icon_arrow.png
   AssetGenImage get iconArrow =>
       const AssetGenImage('assets/images/icon_arrow.png');
+
+  /// File path: assets/images/icon_chat_add.png
+  AssetGenImage get iconChatAdd =>
+      const AssetGenImage('assets/images/icon_chat_add.png');
+
+  /// File path: assets/images/icon_chat_emoji.png
+  AssetGenImage get iconChatEmoji =>
+      const AssetGenImage('assets/images/icon_chat_emoji.png');
+
+  /// File path: assets/images/icon_chat_voice.png
+  AssetGenImage get iconChatVoice =>
+      const AssetGenImage('assets/images/icon_chat_voice.png');
 
   /// File path: assets/images/icon_contact_econtact.png
   AssetGenImage get iconContactEcontact =>
@@ -153,10 +169,14 @@ class $AssetsImagesGen {
         avatar4,
         avatar5,
         avatar6,
+        background,
         haugnbo,
         iconAcountEnotification,
         iconAdd,
         iconArrow,
+        iconChatAdd,
+        iconChatEmoji,
+        iconChatVoice,
         iconContactEcontact,
         iconFindGame,
         iconFindKyk,

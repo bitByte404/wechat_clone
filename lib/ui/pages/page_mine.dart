@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_clone/ui/custom_widget/custom_appbar.dart';
 import 'package:wechat_clone/ui/custom_widget/list_find.dart';
 
 import '../../gen/assets.gen.dart';
@@ -54,7 +53,7 @@ class MessageCard extends StatelessWidget {
       child: Container(
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.only(top: 40, bottom: 30, left: 30),
+          padding: const EdgeInsets.only(top: 60, bottom: 30, left: 30),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

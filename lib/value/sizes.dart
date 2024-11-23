@@ -10,4 +10,5 @@ class AppSizes {
   static const double contactIconSize = 45.0;
   static const double findIconSize = 25.0;
   static const double contatactItemTextSize = 18.0;
+  static const double chatIconSize = 35.0;
 }
