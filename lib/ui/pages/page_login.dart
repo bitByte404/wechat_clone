@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wechat_clone/ui/custom_widget/custom_bottom.dart';
+import 'package:wechat_clone/ui/pages/page_home.dart';
 import 'package:wechat_clone/utls/utils_login.dart';
 import 'package:wechat_clone/value/colors.dart';
 
@@ -97,8 +98,12 @@ class LoginPage extends StatelessWidget {
                             var contry = contryEditController.text;
                             if (phone.isNotEmpty && contry.isNotEmpty) {
                               LoginUtils().updateIsLogined(true);
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/home');
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyHomePage()),
+                                (Route<dynamic> route) => false,
+                              );
                             }
                           },
                         ),

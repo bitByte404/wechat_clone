@@ -96,7 +96,7 @@ class MockData {
     }
   ];
 
-  static List<ChatItemDataEntity> getChatItemDataEntities() {
-    return chatDatas.map((data) => ChatItemDataEntity.fromJson(data)).toList();
-  }
+  // static List<ChatItemDataEntity> getChatItemDataEntities() {
+  //   return chatDatas.map((data) => ChatItemDataEntity.fromJson(data)).toList();
+  // }
 }

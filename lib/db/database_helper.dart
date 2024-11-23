@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import '../models/chat_item_data_entity.dart';
 import '../models/models.dart';
 
 class DatabaseHelper {
@@ -107,5 +108,54 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), "messages.db");
     await deleteDatabase(path);
     _db = null; // Reset database instance
+  }
+
+
+  Future<List<ChatItemDataEntity>> getLastMessages() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.rawQuery('''
+      SELECT Contacts.avatar, Contacts.name, Messages.content AS lastMessage, Messages.time AS timestamp
+      FROM LastMessages
+      JOIN Contacts ON LastMessages.group_contact_id = Contacts.id
+      JOIN Messages ON LastMessages.last_message_id = Messages.id
+    ''');
+
+    return List.generate(maps.length, (i) {
+      return ChatItemDataEntity(
+        avatarPath: maps[i]['avatar'],
+        name: maps[i]['name'],
+        lastMessage: maps[i]['lastMessage'],
+        timestamp: maps[i]['timestamp'],
+      );
+    });
+  }
+
+  Future<List<Contact>> getAllContacts() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('Contacts');
+
+    return List.generate(maps.length, (i) {
+      return Contact.fromMap(maps[i]);
+    });
+  }
+
+  Future<List<MessageItem>> getMessagesByGroupName(String groupName) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.rawQuery('''
+      SELECT Messages.from_contact_id, Messages.content, Messages.time, GroupContact.name AS group_name, Sender.name AS sender_name
+      FROM Messages
+      JOIN Contacts AS GroupContact ON Messages.group_contact_id = GroupContact.id
+      JOIN Contacts AS Sender ON Messages.from_contact_id = Sender.id
+      WHERE GroupContact.name = ?
+    ''', [groupName]);
+
+    return List.generate(maps.length, (i) {
+      return MessageItem(
+        maps[i]['sender_name'] as String,
+        maps[i]['content'] as String,
+        maps[i]['time'] as String,
+        maps[i]['group_name'] as String,
+      );
+    });
   }
 }

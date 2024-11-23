@@ -2,7 +2,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginUtils {
   LoginUtils._internal();
+
   final String _spkey = 'isLogined';
+  final String _hasInitDatas = '_hasInitDatas';
 
   static final LoginUtils _instance = LoginUtils._internal();
 
@@ -16,7 +18,16 @@ class LoginUtils {
   }
 
   updateIsLogined(bool isLogined) async {
-    final prefs = await  SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     prefs.setBool(_spkey, isLogined);
+  }
+
+  Future<bool> checkHasInitDatas() async {
+    final prefs = await SharedPreferences.getInstance();
+    var result = prefs.getBool(_hasInitDatas) ?? false;
+    if (result != true) {
+      prefs.setBool(_hasInitDatas, true);
+    }
+    return result;
   }
 }

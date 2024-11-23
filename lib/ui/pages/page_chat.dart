@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:wechat_clone/db/database_helper.dart';
 import 'package:wechat_clone/gen/assets.gen.dart';
+import 'package:wechat_clone/models/models.dart';
 import 'package:wechat_clone/value/colors.dart';
 import 'package:wechat_clone/value/sizes.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   const ChatPage({super.key, required this.title, required this.avatarPath});
 
   final String title;
   final String avatarPath;
+
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+
+class _ChatPageState extends State<ChatPage> {
+  List<MessageItem> messages = [];
+
+  @override
+  void initState() {
+    _fetchMessages(widget.title);
+  }
+
+  Future<void> _fetchMessages(String groupName) async {
+    var helper = DatabaseHelper();
+    var items = await helper.getMessagesByGroupName(groupName);
+    setState(() {
+      messages = items;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +44,7 @@ class ChatPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              title,
+              widget.title,
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(
@@ -45,28 +68,19 @@ class ChatPage extends StatelessWidget {
         ],
         backgroundColor: AppColors.appBarColor,
       ),
-      body: Column(
-        children: [
-          MessageBuble(
-            otherAvatar: avatarPath,
-          ),
-          MessageBuble(
-            isSelf: false,
-            otherAvatar: avatarPath,
-          ),
-          MessageBuble(
-            otherAvatar: avatarPath,
-          ),
-          MessageBuble(
-            isSelf: false,
-            otherAvatar: avatarPath,
-          ),
-          MessageBuble(
-            otherAvatar: avatarPath,
-          ),
-        ],
+      body: ListView.builder(
+          itemCount: messages.length,
+          itemBuilder: (context, index) {
+            print('发信人：${messages[index].from}');
+            return MessageBuble(
+              content: messages[index].content,
+              isSelf: messages[index].from == '阿伟',
+              otherAvatar: widget.avatarPath,
+            );
+          }),
+      bottomSheet: CustomBottomSheet(
+        groupName: widget.title,
       ),
-      bottomSheet: CustomBottomSheet(),
     );
   }
 }
@@ -75,16 +89,19 @@ class MessageBuble extends StatelessWidget {
   const MessageBuble(
       {super.key,
       this.isSelf = true,
-      this.otherAvatar = 'assets/images/avatar2.jpg'});
+      this.otherAvatar = 'assets/images/avatar2.jpg',
+      required this.content});
 
   final bool isSelf;
   final String otherAvatar;
+  final String content;
 
   @override
   Widget build(BuildContext context) {
     return !isSelf
         ? Container(
-            margin: const EdgeInsets.only(top: 8, left: 8, right: 8),
+            margin:
+                const EdgeInsets.only(top: 10, left: 8, right: 8, bottom: 10),
             child: Row(
               children: [
                 ClipRRect(
@@ -97,22 +114,26 @@ class MessageBuble extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                // CustomPaint(
-                //   painter: TrianglePainter(Colors.white, cornerRadius:  3),
-                // ),
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(3))
-                      // borderRadius: BorderRadius.only(topRight: Radius.circular(3), bottomRight: Radius.circular(3))
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 60),
+                    child: Container(
+                      // margin: EdgeInsets.only(right: 60),
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(3))
+                          // borderRadius: BorderRadius.only(topRight: Radius.circular(3), bottomRight: Radius.circular(3))
+                          ),
+                      padding: const EdgeInsets.all(13),
+                      // color: Colors.white,
+                      child: Text(
+                        content,
+                        style: TextStyle(fontSize: 16),
+                        // textAlign: TextAlign.left,
                       ),
-                  padding: const EdgeInsets.all(13),
-                  // color: Colors.white,
-                  child: const Text(
-                    '等会吃什么',
-                    style: TextStyle(fontSize: 16),
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           )
@@ -121,17 +142,23 @@ class MessageBuble extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: AppColors.selfBubleColor,
-                      borderRadius: BorderRadius.all(Radius.circular(3))
-                      // borderRadius: BorderRadius.only(topRight: Radius.circular(3), bottomRight: Radius.circular(3))
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 60),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: AppColors.selfBubleColor,
+                          borderRadius: BorderRadius.all(Radius.circular(3))
+                          // borderRadius: BorderRadius.only(topRight: Radius.circular(3), bottomRight: Radius.circular(3))
+                          ),
+                      padding: EdgeInsets.all(13),
+                      // color: Colors.white,
+                      child: Text(
+                        content,
+                        style: TextStyle(fontSize: 16),
+                        // textAlign: TextAlign.right,
                       ),
-                  padding: EdgeInsets.all(13),
-                  // color: Colors.white,
-                  child: const Text(
-                    '等会吃什么',
-                    style: TextStyle(fontSize: 16),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -150,7 +177,9 @@ class MessageBuble extends StatelessWidget {
 }
 
 class CustomBottomSheet extends StatefulWidget {
-  const CustomBottomSheet({super.key});
+  const CustomBottomSheet({super.key, required this.groupName});
+
+  final String groupName;
 
   @override
   State<CustomBottomSheet> createState() => _CustomBottomSheetState();
@@ -222,17 +251,29 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                     Icons.add_circle_outline_rounded,
                     size: AppSizes.chatIconSize,
                   )
-                : Container(
-                    decoration: const BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
-                    height: 35,
-                    width: 55,
-                    child: const Center(
-                        child: Text(
-                      '发送',
-                      style: TextStyle(color: Colors.white),
-                    )),
+                : GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        DatabaseHelper().insertMessage(MessageItem(
+                            '阿伟',
+                            controller.text,
+                            "${DateTime.now().millisecondsSinceEpoch}",
+                            widget.groupName));
+                        controller.clear();
+                      });
+                    },
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      height: 35,
+                      width: 55,
+                      child: const Center(
+                          child: Text(
+                        '发送',
+                        style: TextStyle(color: Colors.white),
+                      )),
+                    ),
                   ),
           ),
         ],
