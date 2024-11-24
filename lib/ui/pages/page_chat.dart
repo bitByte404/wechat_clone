@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:wechat_clone/db/database_helper.dart';
 import 'package:wechat_clone/gen/assets.gen.dart';
 import 'package:wechat_clone/models/models.dart';
@@ -14,7 +15,6 @@ class ChatPage extends StatefulWidget {
   @override
   State<ChatPage> createState() => _ChatPageState();
 }
-
 
 class _ChatPageState extends State<ChatPage> {
   List<MessageItem> messages = [];
@@ -128,7 +128,7 @@ class MessageBuble extends StatelessWidget {
                       // color: Colors.white,
                       child: Text(
                         content,
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                         // textAlign: TextAlign.left,
                       ),
                     ),
@@ -253,12 +253,13 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                   )
                 : GestureDetector(
                     onTap: () {
+                      final DateTime now = DateTime.now();
+                      final DateFormat formatter =
+                          DateFormat('yyyy-MM-dd HH:mm:ss');
+                      var time = formatter.format(now);
                       setState(() {
                         DatabaseHelper().insertMessage(MessageItem(
-                            '阿伟',
-                            controller.text,
-                            "${DateTime.now().millisecondsSinceEpoch}",
-                            widget.groupName));
+                            '阿伟', controller.text, time, widget.groupName));
                         controller.clear();
                       });
                     },
